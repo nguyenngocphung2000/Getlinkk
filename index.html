@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi code</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        button { margin: 5px; padding: 10px 20px; cursor: pointer; }
+        textarea { width: 100%; height: 200px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h2>Chuyển đổi danh sách nút thành JSON</h2>
+    
+    <button class="myButton" data-href="shadowrocket://install?module=https://whatshub.top/module/quling.module">趣铃</button>
+    <button class="myButton" data-href="shadowrocket://install?module=https://whatshub.top/module/qupai.module">趣拍</button>
+    <button class="myButton" data-href="shadowrocket://install?module=https://whatshub.top/module/quyan.module">趣颜</button>
+    <button class="myButton" data-href="shadowrocket://install?module=https://whatshub.top/module/silimini.module">Silimini</button>
+
+    <br><br>
+    <button onclick="convertToJSON()">Chuyển đổi</button>
+    
+    <h3>Kết quả JSON:</h3>
+    <textarea id="output" readonly></textarea>
+
+    <script>
+        function convertToJSON() {
+            let buttons = document.querySelectorAll(".myButton");
+            let apps = [];
+
+            buttons.forEach(button => {
+                let link = button.getAttribute("data-href");
+                let name = link.split("/").pop().replace(".module", ""); // Lấy phần cuối của URL làm tên
+
+                apps.push({ 
+                    name: name, 
+                    desc: "Không có mô tả", 
+                    link: link 
+                });
+            });
+
+            document.getElementById("output").value = JSON.stringify(apps, null, 4);
+        }
+    </script>
+
+</body>
+</html>
