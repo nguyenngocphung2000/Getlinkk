@@ -33,7 +33,7 @@
 
             buttons.forEach(button => {
                 let link = button.getAttribute("data-href");
-                let name = link.split("/").pop().replace(".module", ""); // Lấy phần cuối URL làm tên
+                let name = button.textContent.trim();  // Lấy tên từ chữ trên button
 
                 output.push(`{ name: "${name}", desc: "Không có mô tả.", link: "${link}" },`);
             });
