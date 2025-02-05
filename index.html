@@ -3,45 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chuyển đổi code</title>
+    <title>Chuyển đổi HTML thành Code Mẫu</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
-        button { margin: 5px; padding: 10px 20px; cursor: pointer; }
-        textarea { width: 100%; height: 200px; margin-top: 10px; }
+        textarea { width: 90%; height: 200px; margin: 10px 0; padding: 10px; font-family: monospace; }
+        button { padding: 10px 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <h2>Chuyển đổi danh sách nút thành JSON</h2>
+    <h2>Chuyển đổi HTML thành Code Mẫu</h2>
+    <p>Dán code chứa &lt;button&gt; cần chuyển đổi vào ô bên dưới:</p>
     
-    <button class="myButton" data-href="shadowrocket://install?module=https://whatshub.top/module/quling.module">趣铃</button>
-    <button class="myButton" data-href="shadowrocket://install?module=https://whatshub.top/module/qupai.module">趣拍</button>
-    <button class="myButton" data-href="shadowrocket://install?module=https://whatshub.top/module/quyan.module">趣颜</button>
-    <button class="myButton" data-href="shadowrocket://install?module=https://whatshub.top/module/silimini.module">Silimini</button>
-
-    <br><br>
-    <button onclick="convertToJSON()">Chuyển đổi</button>
+    <textarea id="inputHtml" placeholder="Dán code HTML vào đây..."></textarea>
     
-    <h3>Kết quả JSON:</h3>
-    <textarea id="output" readonly></textarea>
+    <br>
+    <button onclick="convertToCode()">Chuyển đổi</button>
+    
+    <h3>Kết quả Code Mẫu:</h3>
+    <textarea id="outputCode" readonly></textarea>
 
     <script>
-        function convertToJSON() {
-            let buttons = document.querySelectorAll(".myButton");
-            let apps = [];
+        function convertToCode() {
+            let inputHtml = document.getElementById("inputHtml").value;
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(inputHtml, "text/html");
+            let buttons = doc.querySelectorAll("button[data-href]");
+            let output = [];
 
             buttons.forEach(button => {
                 let link = button.getAttribute("data-href");
-                let name = link.split("/").pop().replace(".module", ""); // Lấy phần cuối của URL làm tên
+                let name = link.split("/").pop().replace(".module", ""); // Lấy phần cuối URL làm tên
 
-                apps.push({ 
-                    name: name, 
-                    desc: "Không có mô tả", 
-                    link: link 
-                });
+                output.push(`{ name: "${name}", desc: "Không có mô tả.", link: "${link}" },`);
             });
 
-            document.getElementById("output").value = JSON.stringify(apps, null, 4);
+            document.getElementById("outputCode").value = output.join("\n");
         }
     </script>
 
