@@ -7,7 +7,7 @@
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
         textarea { width: 90%; height: 200px; margin: 10px 0; padding: 10px; font-family: monospace; }
-        button { padding: 10px 20px; cursor: pointer; }
+        button { padding: 10px 20px; cursor: pointer; margin: 5px; }
     </style>
 </head>
 <body>
@@ -19,6 +19,7 @@
     
     <br>
     <button onclick="convertToCode()">Chuyển đổi</button>
+    <button onclick="copyAll()">Copy All</button>
     
     <h3>Kết quả Code Mẫu:</h3>
     <textarea id="outputCode" readonly></textarea>
@@ -39,6 +40,13 @@
             });
 
             document.getElementById("outputCode").value = output.join("\n");
+        }
+
+        function copyAll() {
+            let outputText = document.getElementById("outputCode");
+            outputText.select();
+            document.execCommand("copy");
+            alert("Đã sao chép toàn bộ!");
         }
     </script>
 
