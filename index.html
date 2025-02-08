@@ -3,100 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chuyển đổi Word sang Markdown</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <title>Word to Markdown</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Chuyển đổi Word sang Markdown</h1>
 
-    <div class="editor-container">
+    <div class="container">
         <div class="toolbar">
-            <button onclick="formatText('bold')"><b>B</b></button>
-            <button onclick="formatText('italic')"><i>I</i></button>
-            <button onclick="formatText('h1')">H1</button>
-            <button onclick="formatText('h2')">H2</button>
-            <button onclick="formatText('h3')">H3</button>
-            <button onclick="formatText('insertUnorderedList')">•⋮</button>
-            <button onclick="formatText('createLink')">🔗</button>
+            <button data-command="bold"><b>B</b></button>
+            <button data-command="italic"><i>I</i></button>
+            <button data-command="formatBlock" data-value="<h1>">H1</button>
+            <button data-command="formatBlock" data-value="<h2>">H2</button>
+            <button data-command="formatBlock" data-value="<h3>">H3</button>
+            <button data-command="insertUnorderedList">•</button>
+            <button data-command="insertOrderedList">1.</button>
         </div>
-        <div id="editor" contenteditable="true" class="editor"></div>
+
+        <div class="editor-container">
+            <div id="editor" contenteditable="true"></div>
+        </div>
+
+        <textarea id="markdown-output" readonly></textarea>
     </div>
 
-    <h3>Kết quả Markdown:</h3>
-    <pre id="outputMarkdown"></pre>
-
-    <h3>Xem trước:</h3>
-    <div id="preview"></div>
-
-    <div class="button-group">
-        <button onclick="copyMarkdown()">📋 Sao chép</button>
-        <button onclick="downloadMarkdown()">⬇️ Tải xuống</button>
-    </div>
-
-    <script>
-
-        function updateMarkdown() {
-            let htmlContent = document.getElementById("editor").innerHTML;
-            let converter = new showdown.Converter();
-            let markdown = converter.makeMarkdown(htmlContent);
-            document.getElementById("outputMarkdown").innerText = markdown;
-            document.getElementById("preview").innerHTML = converter.makeHtml(markdown);
-        }
-
-        document.getElementById("editor").addEventListener("input", updateMarkdown);
-
-        function copyMarkdown() {
-            let markdownText = document.getElementById("outputMarkdown").innerText;
-            navigator.clipboard.writeText(markdownText);
-            alert("📋 Markdown đã được sao chép!");
-        }
-
-        function downloadMarkdown() {
-            let markdownText = document.getElementById("outputMarkdown").innerText;
-            let blob = new Blob([markdownText], { type: "text/markdown" });
-            let a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = "converted.md";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-   
-    document.addEventListener("DOMContentLoaded", () => {
-        const editor = document.getElementById("editor");
-        const buttons = document.querySelectorAll(".toolbar button");
-
-        buttons.forEach(button => {
-            button.addEventListener("click", function () {
-                const command = this.getAttribute("data-command");
-
-                if (command === "createLink") {
-                    let url = prompt("Nhập URL:");
-                    if (url) document.execCommand(command, false, url);
-                } else {
-                    document.execCommand(command, false, null);
-                }
-
-                editor.focus();
-                updateActiveButtons();
-            });
-        });
-
-        function updateActiveButtons() {
-            buttons.forEach(button => {
-                const command = button.getAttribute("data-command");
-                if (document.queryCommandState(command)) {
-                    button.classList.add("active"); // Giữ trạng thái sáng
-                } else {
-                    button.classList.remove("active");
-                }
-            });
-        }
-
-        editor.addEventListener("mouseup", updateActiveButtons);
-        editor.addEventListener("keyup", updateActiveButtons);
-    });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
