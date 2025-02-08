@@ -3,11 +3,11 @@ body {
     background: #121212;
     color: #e0e0e0;
     font-family: "Poppins", Arial, sans-serif;
-    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 20px;
 }
 
 /* Khung chính */
@@ -24,19 +24,18 @@ body {
     gap: 15px;
 }
 
-/* Trình soạn thảo và Markdown */
+/* Trình soạn thảo & Markdown */
 .editor-container, .markdown-container {
     width: 100%;
     background: #2c2c2c;
     border-radius: 8px;
     border: 1px solid #444;
     padding: 12px;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-/* Thanh công cụ (nằm trong trình soạn thảo) */
+/* Thanh công cụ (Toolbar) */
 .toolbar {
     display: flex;
     gap: 8px;
@@ -47,8 +46,8 @@ body {
     justify-content: center;
 }
 
-/* Nút công cụ */
-.toolbar button {
+/* Nút chức năng */
+.toolbar button, .markdown-toolbar button {
     background: #333;
     color: #e0e0e0;
     border: none;
@@ -61,7 +60,7 @@ body {
     transition: 0.3s;
 }
 
-.toolbar button:hover, .toolbar button.active {
+.toolbar button:hover, .toolbar button.active, .markdown-toolbar button:hover {
     background: #ff9800;
     color: #000;
 }
@@ -80,7 +79,7 @@ body {
     border: 1px solid #444;
 }
 
-/* Hộp hiển thị Markdown */
+/* Hộp Markdown */
 #markdown-output {
     min-height: 200px;
     max-height: 300px;
@@ -95,31 +94,12 @@ body {
     resize: none;
 }
 
-/* Thanh công cụ của hộp Markdown */
+/* Thanh công cụ Markdown */
 .markdown-toolbar {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
     margin-bottom: 10px;
-}
-
-/* Nút Copy và Download */
-.markdown-toolbar button {
-    background: #333;
-    color: #e0e0e0;
-    border: none;
-    padding: 10px;
-    width: 36px;
-    height: 36px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 6px;
-    transition: 0.3s;
-}
-
-.markdown-toolbar button:hover {
-    background: #ff9800;
-    color: #000;
 }
 
 /* Đảm bảo các hộp có cùng kích cỡ */
