@@ -1,4 +1,4 @@
-/* Cài đặt chung */
+/* 🌑 Cài đặt chung (Dark Mode) */
 body {
     font-family: Arial, sans-serif;
     background-color: #1e1e1e;
@@ -9,10 +9,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden; /* Ngăn cuộn trang */
 }
 
-/* Container chính */
+/* 🟦 Container chính */
 .container {
     width: 90%;
     max-width: 800px;
@@ -20,19 +21,24 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
 }
 
-/* Thanh điều hướng */
+/* 🔝 Thanh điều hướng */
 nav {
     display: flex;
     justify-content: space-around;
     background-color: #333;
     padding: 10px;
     border-radius: 5px;
-    margin-bottom: 20px;
-    position: sticky;
+    width: 100%;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
 }
 
@@ -51,20 +57,22 @@ nav button.active {
     border-radius: 5px;
 }
 
-/* Chỉnh lại phần nội dung */
+/* 📄 Nội dung căn giữa */
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    margin-top: 60px; /* Đẩy xuống dưới thanh nav */
 }
 
-/* Editor + Markdown */
+/* 📝 Hộp nhập liệu */
 .editor-container, .markdown-container {
     width: 100%;
     margin-bottom: 20px;
 }
 
+/* ⚡ Chỉnh lại hộp văn bản (Đẹp & căn giữa) */
 #editor, #markdown-output, #js-input, #python-output {
     width: 100%;
     height: 150px;
@@ -74,9 +82,10 @@ nav button.active {
     padding: 10px;
     border-radius: 5px;
     overflow-y: auto;
+    resize: none;
 }
 
-/* Thanh công cụ */
+/* 🔧 Thanh công cụ nhỏ & gọn */
 .toolbar, .markdown-toolbar {
     display: flex;
     flex-wrap: wrap;
@@ -94,6 +103,7 @@ nav button.active {
     border-radius: 4px;
     transition: 0.3s;
     font-size: 14px;
+    min-width: 32px;
 }
 
 .toolbar button:hover, .markdown-toolbar button:hover {
@@ -104,7 +114,7 @@ nav button.active {
     background: #0078D7;
 }
 
-/* Ẩn section khi không active */
+/* 📌 Ẩn nội dung khi không active */
 .hidden {
     display: none;
 }
