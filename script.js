@@ -76,31 +76,40 @@ function convertToPython() {
     }
 
     let pythonCode = jsCode
-        // Xóa khai báo biến (var, let, const)
+        // Xóa từ khóa khai báo biến (var, let, const)
         .replace(/\b(var|let|const)\s+/g, "")
         // Chuyển console.log thành print
-        .replace(/console\.log/g, "print")
-        // Xóa dấu chấm phẩy
-        .replace(/;/g, "")
-        // Chuyển === và !== thành == và !=
+        .replace(/console\.log\s*\(/g, "print(")
+        // Chuyển toán tử === thành ==
         .replace(/===/g, "==")
         .replace(/!==/g, "!=")
-        // Chuyển for loop (for (let i = 0; i < n; i++)) thành Python
-        .replace(/for\s*\(\s*let\s+(\w+)\s*=\s*(\d+);\s*\1\s*<\s*(\w+);\s*\1\+\+\)/g, "for $1 in range($2, $3):")
-        // Chuyển while loop (while (condition) { }) thành Python
-        .replace(/while\s*\((.*?)\)\s*{/g, "while $1:")
-        // Chuyển function thành def
-        .replace(/function\s+(\w+)\s*\((.*?)\)\s*{/g, "def $1($2):")
-        // Chuyển arrow function (() => {}) thành def
-        .replace(/\((.*?)\)\s*=>\s*{/g, "def func($1):")
-        // Chuyển object { key: value } thành dictionary { "key": value }
-        .replace(/(\w+)\s*:\s*(\w+)/g, '"$1": $2')
-        // Chuyển return thành Python return
-        .replace(/return\s+/g, "return ");
+        // Chuyển object {} thành dictionary {}
+        .replace(/\{([^}]+)\}/g, (match, p1) => {
+            return "{" + p1.replace(/:\s*/g, ": ").replace(/,/g, ", ") + "}";
+        })
+        // Chuyển array [] thành list []
+        .replace(/\[(.*?)\]/g, "[$1]")
+        // Xóa dấu chấm phẩy cuối dòng
+        .replace(/;\s*$/gm, "")
+        // Chuyển for loop từ JavaScript sang Python
+        .replace(/for\s*\(\s*(let|var)?\s*(\w+)\s*=\s*(\d+)\s*;\s*\2\s*<\s*(\d+)\s*;\s*\2\+\+\s*\)/g, "for $2 in range($3, $4):")
+        // Chuyển while loop
+        .replace(/while\s*\((.*?)\)/g, "while $1:")
+        // Chuyển function declaration sang Python
+        .replace(/function\s+(\w+)\s*\((.*?)\)\s*\{/g, "def $1($2):")
+        // Chuyển arrow function
+        .replace(/(\w+)\s*=\s*\((.*?)\)\s*=>\s*\{/g, "def $1($2):")
+        // Xóa dấu ngoặc nhọn của block code
+        .replace(/\{|\}/g, "")
+        // Chuyển toán tử i-- và i++ thành Python tương đương
+        .replace(/(\w+)\+\+/g, "$1 += 1")
+        .replace(/(\w+)--/g, "$1 -= 1");
 
-    // Xử lý các dấu đóng mở ngoặc {}
-    pythonCode = pythonCode.replace(/{/g, "").replace(/}/g, "");
+    // Cải thiện thụt lề (Indentation)
+    pythonCode = pythonCode.split("\n").map(line => {
+        let indentLevel = (line.match(/^\s+/) || [""])[0].length / 4;
+        return "    ".repeat(indentLevel) + line.trim();
+    }).join("\n");
 
     document.getElementById("python-output").value = pythonCode;
 }
-
