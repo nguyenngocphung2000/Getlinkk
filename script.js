@@ -54,19 +54,17 @@ document.addEventListener("DOMContentLoaded", () => {
         a.click();
     });
 });
-document.getElementById("markdown-tab").addEventListener("click", function () {
-    document.getElementById("markdown-section").classList.remove("hidden");
-    document.getElementById("code-section").classList.add("hidden");
-    this.classList.add("active");
-    document.getElementById("code-tab").classList.remove("active");
-});
+function switchTab(tabId) {
+    document.querySelectorAll(".tab-content").forEach(tab => {
+        tab.style.display = "none";
+    });
+    document.getElementById(tabId).style.display = "block";
 
-document.getElementById("code-tab").addEventListener("click", function () {
-    document.getElementById("code-section").classList.remove("hidden");
-    document.getElementById("markdown-section").classList.add("hidden");
-    this.classList.add("active");
-    document.getElementById("markdown-tab").classList.remove("active");
-})
+    document.querySelectorAll(".tab-button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+    document.getElementById(tabId + "-tab").classList.add("active");
+}
 function convertToPython() {
     let jsCode = document.getElementById("js-input").value;
 
