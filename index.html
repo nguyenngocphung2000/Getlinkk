@@ -5,68 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuyển đổi Word sang Markdown</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-        h1 { text-align: center; }
-
-        .editor-container {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-            background: #fff;
-        }
-
-        .toolbar {
-            display: flex;
-            background: #f0f0f0;
-            padding: 5px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .toolbar button {
-            padding: 6px;
-            margin: 2px;
-            border: none;
-            background: #ddd;
-            cursor: pointer;
-            font-size: 18px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .toolbar button:hover {
-            background: #bbb;
-        }
-
-        .editor {
-            width: 100%;
-            height: 200px;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            outline: none;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        pre, #preview {
-            width: 100%;
-            height: 200px;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            background: #fff;
-        }
-
-        pre { background: #f4f4f4; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Chuyển đổi Word sang Markdown</h1>
@@ -90,8 +29,10 @@
     <h3>Xem trước:</h3>
     <div id="preview"></div>
 
-    <button onclick="copyMarkdown()">📋</button>
-    <button onclick="downloadMarkdown()">⬇️</button>
+    <div class="button-group">
+        <button onclick="copyMarkdown()">📋 Sao chép</button>
+        <button onclick="downloadMarkdown()">⬇️ Tải xuống</button>
+    </div>
 
     <script>
         function formatText(command) {
