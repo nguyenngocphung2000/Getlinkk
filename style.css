@@ -61,6 +61,11 @@ h1, h3 {
     transform: scale(1.1);
 }
 
+.toolbar button.active {
+    background: #ff9800;
+    color: #fff;
+    box-shadow: 0 0 10px #ff9800;
+}
 /* Vùng nhập liệu */
 .editor {
     width: 100%;
