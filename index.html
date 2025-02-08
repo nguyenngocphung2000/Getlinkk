@@ -3,30 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teẽt to Markdown</title>
+    <title>Text to Markdown</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
+        <!-- Trình soạn thảo -->
         <div class="editor-container">
             <div class="toolbar">
-                <button id="bold"><b>B</b></button>
-                <button id="italic"><i>I</i></button>
-                <button id="underline"><u>U</u></button>
-                <button id="h1">H1</button>
-                <button id="h2">H2</button>
-                <button id="h3">H3</button>
-                <button id="bullet">•</button>
-                <button id="numbered">1.</button>
-                <button id="link">🔗</button>
+                <button data-command="bold"><b>B</b></button>
+                <button data-command="italic"><i>I</i></button>
+                <button data-command="formatBlock" data-value="<h1>">H1</button>
+                <button data-command="formatBlock" data-value="<h2>">H2</button>
+                <button data-command="formatBlock" data-value="<h3>">H3</button>
+                <button data-command="insertUnorderedList">•</button>
+                <button data-command="insertOrderedList">1.</button>
+                <button data-command="createLink">🔗</button>
             </div>
             <div id="editor" contenteditable="true"></div>
         </div>
 
+        <!-- Hộp hiển thị Markdown -->
         <div class="markdown-container">
             <div class="markdown-toolbar">
-                <button id="copy">📋</button>
-                <button id="download">⬇️</button>
+                <button id="copyBtn">📋</button>
+                <button id="downloadBtn">⬇️</button>
             </div>
             <textarea id="markdown-output" readonly></textarea>
         </div>
