@@ -67,4 +67,40 @@ document.getElementById("code-tab").addEventListener("click", function () {
     this.classList.add("active");
     document.getElementById("markdown-tab").classList.remove("active");
 })
+function convertToPython() {
+    let jsCode = document.getElementById("js-input").value;
+
+    if (!jsCode.trim()) {
+        alert("Vui lòng nhập code JavaScript!");
+        return;
+    }
+
+    let pythonCode = jsCode
+        // Xóa khai báo biến (var, let, const)
+        .replace(/\b(var|let|const)\s+/g, "")
+        // Chuyển console.log thành print
+        .replace(/console\.log/g, "print")
+        // Xóa dấu chấm phẩy
+        .replace(/;/g, "")
+        // Chuyển === và !== thành == và !=
+        .replace(/===/g, "==")
+        .replace(/!==/g, "!=")
+        // Chuyển for loop (for (let i = 0; i < n; i++)) thành Python
+        .replace(/for\s*\(\s*let\s+(\w+)\s*=\s*(\d+);\s*\1\s*<\s*(\w+);\s*\1\+\+\)/g, "for $1 in range($2, $3):")
+        // Chuyển while loop (while (condition) { }) thành Python
+        .replace(/while\s*\((.*?)\)\s*{/g, "while $1:")
+        // Chuyển function thành def
+        .replace(/function\s+(\w+)\s*\((.*?)\)\s*{/g, "def $1($2):")
+        // Chuyển arrow function (() => {}) thành def
+        .replace(/\((.*?)\)\s*=>\s*{/g, "def func($1):")
+        // Chuyển object { key: value } thành dictionary { "key": value }
+        .replace(/(\w+)\s*:\s*(\w+)/g, '"$1": $2')
+        // Chuyển return thành Python return
+        .replace(/return\s+/g, "return ");
+
+    // Xử lý các dấu đóng mở ngoặc {}
+    pythonCode = pythonCode.replace(/{/g, "").replace(/}/g, "");
+
+    document.getElementById("python-output").value = pythonCode;
+}
 
