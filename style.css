@@ -1,120 +1,136 @@
-/* 🌑 Cài đặt chung (Dark Mode) */
+/* Tổng thể */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1e1e1e;
-    color: #ffffff;
-    margin: 0;
-    padding: 0;
+    background: #121212;
+    color: #e0e0e0;
+    font-family: "Poppins", Arial, sans-serif;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    overflow: hidden; /* Ngăn cuộn trang */
+    align-items: center;
+    height: 100vh;  /* Căn giữa theo chiều dọc */
+    margin: 0;
 }
 
-/* 🟦 Container chính */
+/* Khung chính */
 .container {
     width: 90%;
-    max-width: 800px;
-    background-color: #252526;
+    max-width: 900px;
+    background: #1e1e1e;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    border: 1px solid #333;
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    justify-content: center;  /* Căn giữa nội dung */
     align-items: center;
-    position: relative;
 }
 
-/* 🔝 Thanh điều hướng */
-nav {
-    display: flex;
-    justify-content: space-around;
-    background-color: #333;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-}
-
-nav button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    padding: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-nav button.active {
-    background-color: #0078D7;
-    border-radius: 5px;
-}
-
-/* 📄 Nội dung căn giữa */
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 60px; /* Đẩy xuống dưới thanh nav */
-}
-
-/* 📝 Hộp nhập liệu */
+/* Trình soạn thảo & Markdown */
 .editor-container, .markdown-container {
     width: 100%;
-    margin-bottom: 20px;
+    background: #2c2c2c;
+    border-radius: 8px;
+    border: 1px solid #444;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* ⚡ Chỉnh lại hộp văn bản (Đẹp & căn giữa) */
-#editor, #markdown-output, #js-input, #python-output {
-    width: 100%;
-    height: 150px;
+/* Thanh công cụ (Toolbar) */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px;
+    background: #252525;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    justify-content: center;
+    max-width: 100%;
+    overflow-x: auto;  /* Thanh cuộn ngang nếu quá nhiều nút */
+}
+
+/* Nút công cụ */
+.toolbar button {
     background: #333;
-    color: #fff;
-    border: 1px solid #555;
-    padding: 10px;
-    border-radius: 5px;
+    color: #e0e0e0;
+    border: none;
+    padding: 6px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Hiệu ứng khi nhấn */
+.toolbar button:hover,
+.toolbar button.active {
+    background: #ff9800;
+    color: #000;
+}
+
+/* Ô nhập văn bản */
+#editor {
+    width: 100%;
+    min-height: 200px;
+    max-height: 300px;
     overflow-y: auto;
+    padding: 12px;
+    background: #1e1e1e;
+    border-radius: 6px;
+    outline: none;
+    color: #e0e0e0;
+    font-size: 16px;
+    border: 1px solid #444;
+}
+
+/* Hộp Markdown */
+#markdown-output {
+    width: 100%;
+    min-height: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 12px;
+    background: #1e1e1e;
+    border-radius: 6px;
+    outline: none;
+    color: #e0e0e0;
+    font-size: 16px;
+    border: 1px solid #444;
     resize: none;
 }
 
-/* 🔧 Thanh công cụ nhỏ & gọn */
-.toolbar, .markdown-toolbar {
+/* Thanh công cụ Markdown */
+.markdown-toolbar {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    justify-content: flex-end;
+    gap: 6px;
     margin-bottom: 10px;
-    justify-content: center;
 }
 
-.toolbar button, .markdown-toolbar button {
-    background: #444;
-    border: none;
-    color: white;
-    padding: 8px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: 0.3s;
-    font-size: 14px;
-    min-width: 32px;
+/* Đảm bảo các hộp có cùng kích cỡ */
+.editor-container, .markdown-container {
+    height: auto;
+    min-height: 280px;
 }
 
-.toolbar button:hover, .markdown-toolbar button:hover {
-    background: #0078D7;
-}
+/* Điều chỉnh căn giữa trên màn hình nhỏ */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
 
-.toolbar button.active {
-    background: #0078D7;
-}
-
-/* 📌 Ẩn nội dung khi không active */
-.hidden {
-    display: none;
+    .toolbar button {
+        width: 36px;
+        height: 36px;
+    }
 }
