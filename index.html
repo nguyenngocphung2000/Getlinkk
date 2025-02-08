@@ -8,28 +8,81 @@
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
         h1 { text-align: center; }
-        .toolbar { margin-bottom: 10px; }
-        button { margin: 5px; padding: 8px 12px; font-size: 14px; cursor: pointer; }
-        .editor { width: 100%; height: 200px; padding: 10px; font-size: 16px; border: 1px solid #ccc; }
-        pre { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; min-height: 100px; }
-        #preview { border: 1px solid #ccc; padding: 10px; min-height: 100px; background: #fff; }
+
+        .editor-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .toolbar {
+            display: flex;
+            background: #f0f0f0;
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .toolbar button {
+            padding: 6px;
+            margin: 2px;
+            border: none;
+            background: #ddd;
+            cursor: pointer;
+            font-size: 18px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toolbar button:hover {
+            background: #bbb;
+        }
+
+        .editor {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        pre, #preview {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #fff;
+        }
+
+        pre { background: #f4f4f4; }
     </style>
 </head>
 <body>
     <h1>Chuyển đổi Word sang Markdown</h1>
 
-    <div class="toolbar">
-        <button onclick="formatText('bold')">🅱️ In đậm</button>
-        <button onclick="formatText('italic')">🔤 In nghiêng</button>
-        <button onclick="formatText('h1')"># Tiêu đề H1</button>
-        <button onclick="formatText('h2')">## Tiêu đề H2</button>
-        <button onclick="formatText('h3')">### Tiêu đề H3</button>
-        <button onclick="formatText('list')">📜 Danh sách</button>
-        <button onclick="formatText('link')">🔗 Liên kết</button>
+    <div class="editor-container">
+        <div class="toolbar">
+            <button onclick="formatText('bold')"><b>B</b></button>
+            <button onclick="formatText('italic')"><i>I</i></button>
+            <button onclick="formatText('h1')">H1</button>
+            <button onclick="formatText('h2')">H2</button>
+            <button onclick="formatText('h3')">H3</button>
+            <button onclick="formatText('insertUnorderedList')">•⋮</button>
+            <button onclick="formatText('createLink')">🔗</button>
+        </div>
+        <div id="editor" contenteditable="true" class="editor"></div>
     </div>
-
-    <label for="editor">Nhập hoặc dán nội dung từ Word:</label>
-    <div id="editor" contenteditable="true" class="editor"></div>
 
     <h3>Kết quả Markdown:</h3>
     <pre id="outputMarkdown"></pre>
@@ -37,12 +90,17 @@
     <h3>Xem trước:</h3>
     <div id="preview"></div>
 
-    <button onclick="copyMarkdown()">📋 Sao chép Markdown</button>
-    <button onclick="downloadMarkdown()">⬇️ Tải xuống .md</button>
+    <button onclick="copyMarkdown()">📋</button>
+    <button onclick="downloadMarkdown()">⬇️</button>
 
     <script>
         function formatText(command) {
-            document.execCommand(command, false, null);
+            if (command === "createLink") {
+                let url = prompt("Nhập URL:");
+                if (url) document.execCommand(command, false, url);
+            } else {
+                document.execCommand(command, false, null);
+            }
             updateMarkdown();
         }
 
