@@ -9,7 +9,32 @@ body {
     height: 100vh;  /* Căn giữa theo chiều dọc */
     margin: 0;
 }
+nav {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background: #1e1e1e;
+    padding: 10px;
+    gap: 10px;
+    position: fixed;
+    top: 0;
+}
 
+nav button {
+    background: #333;
+    color: #e0e0e0;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+nav button:hover, nav button.active {
+    background: #ff9800;
+    color: #000;
+}
 /* Khung chính */
 .container {
     width: 90%;
