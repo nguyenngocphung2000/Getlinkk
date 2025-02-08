@@ -1,42 +1,93 @@
-.container {
+/* Cài đặt chung */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 900px;
-    margin: auto;
+    height: 100vh;
 }
 
-/* Thanh điều hướng (nav) */
+/* Container */
+.container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #252526;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Thanh điều hướng */
 nav {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    gap: 10px;
+    justify-content: space-around;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
     margin-bottom: 20px;
 }
 
-.tab-button {
-    padding: 10px 20px;
-    background: #222;
-    color: white;
+nav button {
+    background: none;
     border: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.tab-button.active {
-    background: #555;
-    font-weight: bold;
+nav button.active {
+    background-color: #0078D7;
+    border-radius: 5px;
 }
 
-/* Ẩn tab khi chưa chọn */
-.tab-content {
-    display: none;
+/* Editor + Markdown */
+.editor-container, .markdown-container {
+    margin-bottom: 20px;
+}
+
+#editor, #markdown-output, #js-input, #python-output {
     width: 100%;
+    height: 150px;
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-y: auto;
 }
 
-.tab-content.active {
-    display: block;
+/* Thanh công cụ */
+.toolbar, .markdown-toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.toolbar button, .markdown-toolbar button {
+    background: #444;
+    border: none;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.toolbar button:hover, .markdown-toolbar button:hover {
+    background: #0078D7;
+}
+
+.toolbar button.active {
+    background: #0078D7;
+}
+
+/* Ẩn section khi không active */
+.hidden {
+    display: none;
 }
