@@ -56,6 +56,11 @@ nav button:hover, nav button.active {
 .tab-content.active {
     display: block;
 }
+.content {
+    display: flex;
+    flex-direction: column; /* Đảm bảo nội dung xếp dọc */
+    width: 100%;
+}
 /* Khung chính */
 .container {
     width: 90%;
