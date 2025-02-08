@@ -73,6 +73,40 @@
         }
         updateMarkdown();
     }
+    document.addEventListener("DOMContentLoaded", () => {
+        const editor = document.getElementById("editor");
+        const buttons = document.querySelectorAll(".toolbar button");
+
+        buttons.forEach(button => {
+            button.addEventListener("click", function () {
+                const command = this.getAttribute("data-command");
+
+                if (command === "createLink") {
+                    let url = prompt("Nhập URL:");
+                    if (url) document.execCommand(command, false, url);
+                } else {
+                    document.execCommand(command, false, null);
+                }
+
+                editor.focus();
+                updateActiveButtons();
+            });
+        });
+
+        function updateActiveButtons() {
+            buttons.forEach(button => {
+                const command = button.getAttribute("data-command");
+                if (document.queryCommandState(command)) {
+                    button.classList.add("active"); // Giữ trạng thái sáng
+                } else {
+                    button.classList.remove("active");
+                }
+            });
+        }
+
+        editor.addEventListener("mouseup", updateActiveButtons);
+        editor.addEventListener("keyup", updateActiveButtons);
+    });
     </script>
 </body>
 </html>
