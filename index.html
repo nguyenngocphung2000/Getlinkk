@@ -4,71 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuyển đổi Word sang Markdown</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
         h1 { text-align: center; }
-        textarea { width: 100%; height: 200px; padding: 10px; font-size: 16px; }
-        pre { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; white-space: pre-wrap; word-wrap: break-word; min-height: 100px; }
         .toolbar { margin-bottom: 10px; }
         button { margin: 5px; padding: 8px 12px; font-size: 14px; cursor: pointer; }
+        .editor { width: 100%; height: 200px; padding: 10px; font-size: 16px; border: 1px solid #ccc; }
+        pre { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; min-height: 100px; }
+        #preview { border: 1px solid #ccc; padding: 10px; min-height: 100px; background: #fff; }
     </style>
 </head>
 <body>
     <h1>Chuyển đổi Word sang Markdown</h1>
 
     <div class="toolbar">
-        <button onclick="applyFormat('bold')">🅱️ In đậm</button>
-        <button onclick="applyFormat('italic')">🔤 In nghiêng</button>
-        <button onclick="applyFormat('h1')"># Tiêu đề H1</button>
-        <button onclick="applyFormat('h2')">## Tiêu đề H2</button>
-        <button onclick="applyFormat('h3')">### Tiêu đề H3</button>
-        <button onclick="applyFormat('list')">📜 Danh sách</button>
-        <button onclick="applyFormat('link')">🔗 Liên kết</button>
+        <button onclick="formatText('bold')">🅱️ In đậm</button>
+        <button onclick="formatText('italic')">🔤 In nghiêng</button>
+        <button onclick="formatText('h1')"># Tiêu đề H1</button>
+        <button onclick="formatText('h2')">## Tiêu đề H2</button>
+        <button onclick="formatText('h3')">### Tiêu đề H3</button>
+        <button onclick="formatText('list')">📜 Danh sách</button>
+        <button onclick="formatText('link')">🔗 Liên kết</button>
     </div>
 
-    <label for="inputText">Dán nội dung từ Word hoặc nhập vào đây:</label>
-    <textarea id="inputText" placeholder="Dán văn bản từ Word hoặc nhập vào đây..."></textarea>
+    <label for="editor">Nhập hoặc dán nội dung từ Word:</label>
+    <div id="editor" contenteditable="true" class="editor"></div>
 
     <h3>Kết quả Markdown:</h3>
     <pre id="outputMarkdown"></pre>
+
+    <h3>Xem trước:</h3>
+    <div id="preview"></div>
 
     <button onclick="copyMarkdown()">📋 Sao chép Markdown</button>
     <button onclick="downloadMarkdown()">⬇️ Tải xuống .md</button>
 
     <script>
-        function applyFormat(type) {
-            let textarea = document.getElementById("inputText");
-            let start = textarea.selectionStart;
-            let end = textarea.selectionEnd;
-            let text = textarea.value;
-            let selectedText = text.substring(start, end);
-
-            if (type === 'bold') {
-                textarea.setRangeText(`**${selectedText || "đậm"}**`);
-            } else if (type === 'italic') {
-                textarea.setRangeText(`*${selectedText || "nghiêng"}*`);
-            } else if (type === 'h1') {
-                textarea.setRangeText(`# ${selectedText || "Tiêu đề H1"}\n`);
-            } else if (type === 'h2') {
-                textarea.setRangeText(`## ${selectedText || "Tiêu đề H2"}\n`);
-            } else if (type === 'h3') {
-                textarea.setRangeText(`### ${selectedText || "Tiêu đề H3"}\n`);
-            } else if (type === 'list') {
-                textarea.setRangeText(`- ${selectedText || "Danh sách"}\n`);
-            } else if (type === 'link') {
-                textarea.setRangeText(`[${selectedText || "Tên link"}](https://example.com)`);
-            }
-
-            textarea.focus();
+        function formatText(command) {
+            document.execCommand(command, false, null);
             updateMarkdown();
         }
 
         function updateMarkdown() {
-            let text = document.getElementById("inputText").value;
-            document.getElementById("outputMarkdown").innerText = text;
+            let htmlContent = document.getElementById("editor").innerHTML;
+            let converter = new showdown.Converter();
+            let markdown = converter.makeMarkdown(htmlContent);
+            document.getElementById("outputMarkdown").innerText = markdown;
+            document.getElementById("preview").innerHTML = converter.makeHtml(markdown);
         }
 
-        document.getElementById("inputText").addEventListener("input", updateMarkdown);
+        document.getElementById("editor").addEventListener("input", updateMarkdown);
 
         function copyMarkdown() {
             let markdownText = document.getElementById("outputMarkdown").innerText;
