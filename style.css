@@ -35,6 +35,26 @@ nav button:hover, nav button.active {
     background: #ff9800;
     color: #000;
 }
+.tab-btn {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: #0078D7;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
 /* Khung chính */
 .container {
     width: 90%;
