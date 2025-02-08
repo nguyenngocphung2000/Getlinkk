@@ -1,55 +1,32 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chuyển đổi Văn bản & Code</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word to Markdown</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <!-- Thanh điều hướng -->
-    <nav>
-        <button id="markdown-tab" class="tab-button active" onclick="switchTab('markdown')">📄 Text → Md</button>
-        <button id="code-tab" class="tab-button" onclick="switchTab('code')">💻 JS → Python</button>
-    </nav>
+        <div class="toolbar">
+            <button data-command="bold"><b>B</b></button>
+            <button data-command="italic"><i>I</i></button>
+            <button data-command="formatBlock" data-value="<h1>">H1</button>
+            <button data-command="formatBlock" data-value="<h2>">H2</button>
+            <button data-command="formatBlock" data-value="<h3>">H3</button>
+            <button data-command="insertUnorderedList">•</button>
+            <button data-command="insertOrderedList">1.</button>
+            <button data-command="createLink">🔗</button>
+</div>
 
-    <!-- Nội dung của từng tab -->
-    <div class="content">
-        <!-- Tab 1: Chuyển đổi Văn bản sang Markdown -->
-        <div id="markdown" class="tab-content active">
-            <h2>Text to Markdown</h2>
-            <div class="editor-container">
-                <div class="toolbar">
-                    <button id="bold"><b>B</b></button>
-                    <button id="italic"><i>I</i></button>
-                    <button id="underline"><u>U</u></button>
-                    <button id="h1">H1</button>
-                    <button id="h2">H2</button>
-                    <button id="h3">H3</button>
-                    <button id="bullet">•</button>
-                    <button id="numbered">1.</button>
-                    <button id="link">🔗</button>
-                </div>
-                <div id="editor" contenteditable="true"></div>
-            </div>
-            <div class="markdown-container">
-                <div class="markdown-toolbar">
-                    <button id="copy">📋</button>
-                    <button id="download">⬇️</button>
-                </div>
-                <textarea id="markdown-output" readonly></textarea>
-            </div>
-        </div>
-
-        <!-- Tab 2: Chuyển đổi JS → Python -->
-        <div id="code" class="tab-content">
-            <h2>JavaScript → Python</h2>
-            <textarea id="js-input" placeholder="Nhập code JavaScript..."></textarea>
-            <button onclick="convertToPython()">➡️ Convert</button>
-            <textarea id="python-output" readonly placeholder="Kết quả Python..."></textarea>
-        </div>
-    </div>
+             <div class="markdown-container">
+        
+<div class="markdown-toolbar">
+                <button id="copyBtn">📋</button>
+                <button id="downloadBtn">⬇️</button>
+</div>
+<textarea id="markdown-output" readonly></textarea>
+</div>
 </div>
 <script src="script.js"></script>
 </body>
