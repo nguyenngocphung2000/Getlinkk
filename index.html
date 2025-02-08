@@ -35,15 +35,6 @@
     </div>
 
     <script>
-        function formatText(command) {
-            if (command === "createLink") {
-                let url = prompt("Nhập URL:");
-                if (url) document.execCommand(command, false, url);
-            } else {
-                document.execCommand(command, false, null);
-            }
-            updateMarkdown();
-        }
 
         function updateMarkdown() {
             let htmlContent = document.getElementById("editor").innerHTML;
@@ -71,6 +62,17 @@
             a.click();
             document.body.removeChild(a);
         }
+   
+    function formatText(command) {
+        document.getElementById("editor").focus();
+        if (command === "createLink") {
+            let url = prompt("Nhập URL:");
+            if (url) document.execCommand(command, false, url);
+        } else {
+            document.execCommand(command, false, null);
+        }
+        updateMarkdown();
+    }
     </script>
 </body>
 </html>
