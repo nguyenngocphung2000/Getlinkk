@@ -11,7 +11,8 @@
         <button id="markdown-tab" class="active">📄 Text → Md</button>
         <button id="code-tab">💻 JS → Python</button>
     </nav>
-    <section id="markdown-section" class="content-section">
+   <div class="tab-content" id="markdownTab">
+        <h2>Text to Markdown</h2>
     <div class="container">
         <div class="editor-container">
             <div class="toolbar">
@@ -35,15 +36,17 @@
             <textarea id="markdown-output" readonly></textarea>
         </div>
     </div>
-    </section>
-    <section id="code-section" class="content-section hidden">
+    
+        </div>
+     <div class="tab-content" id="jsToPyTab" style="display: none;">
+        <h2>JavaScript → Python</h2>
         <div class="container">
             <h2>JavaScript to Python</h2>
             <textarea id="js-input" placeholder="Nhập code JavaScript..."></textarea>
             <button onclick="convertToPython()">➡️ Convert</button>
             <textarea id="python-output" readonly placeholder="Kết quả Python..."></textarea>
         </div>
-    </section>
+        </div>
     <script src="script.js"></script>
 </body>
 </html>
