@@ -1,3 +1,4 @@
+/* Tổng thể */
 body {
     background: #121212;
     color: #e0e0e0;
@@ -5,10 +6,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    height: 100vh;  /* Căn giữa theo chiều dọc */
+    margin: 0;
 }
 
+/* Khung chính */
 .container {
     width: 90%;
     max-width: 900px;
@@ -20,8 +22,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    justify-content: center;  /* Căn giữa nội dung */
+    align-items: center;
 }
 
+/* Trình soạn thảo & Markdown */
 .editor-container, .markdown-container {
     width: 100%;
     background: #2c2c2c;
@@ -30,19 +35,24 @@ body {
     padding: 12px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
+/* Thanh công cụ (Toolbar) */
 .toolbar {
     display: flex;
+    flex-wrap: wrap;
     gap: 6px;
     padding: 8px;
     background: #252525;
     border-radius: 8px;
     margin-bottom: 10px;
     justify-content: center;
-    flex-wrap: wrap;
+    max-width: 100%;
+    overflow-x: auto;  /* Thanh cuộn ngang nếu quá nhiều nút */
 }
 
+/* Nút công cụ */
 .toolbar button {
     background: #333;
     color: #e0e0e0;
@@ -57,15 +67,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
+/* Hiệu ứng khi nhấn */
 .toolbar button:hover,
 .toolbar button.active {
     background: #ff9800;
     color: #000;
 }
 
+/* Ô nhập văn bản */
 #editor {
+    width: 100%;
     min-height: 200px;
     max-height: 300px;
     overflow-y: auto;
@@ -78,7 +92,9 @@ body {
     border: 1px solid #444;
 }
 
+/* Hộp Markdown */
 #markdown-output {
+    width: 100%;
     min-height: 200px;
     max-height: 300px;
     overflow-y: auto;
@@ -92,6 +108,7 @@ body {
     resize: none;
 }
 
+/* Thanh công cụ Markdown */
 .markdown-toolbar {
     display: flex;
     justify-content: flex-end;
@@ -99,7 +116,21 @@ body {
     margin-bottom: 10px;
 }
 
+/* Đảm bảo các hộp có cùng kích cỡ */
 .editor-container, .markdown-container {
     height: auto;
     min-height: 280px;
+}
+
+/* Điều chỉnh căn giữa trên màn hình nhỏ */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .toolbar button {
+        width: 36px;
+        height: 36px;
+    }
 }
