@@ -6,12 +6,13 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-/* Container */
+/* Container chính */
 .container {
     width: 90%;
     max-width: 800px;
@@ -19,6 +20,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    position: relative;
 }
 
 /* Thanh điều hướng */
@@ -29,6 +31,9 @@ nav {
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav button {
@@ -46,8 +51,17 @@ nav button.active {
     border-radius: 5px;
 }
 
+/* Chỉnh lại phần nội dung */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 /* Editor + Markdown */
 .editor-container, .markdown-container {
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -65,8 +79,10 @@ nav button.active {
 /* Thanh công cụ */
 .toolbar, .markdown-toolbar {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 10px;
+    justify-content: center;
 }
 
 .toolbar button, .markdown-toolbar button {
@@ -77,6 +93,7 @@ nav button.active {
     cursor: pointer;
     border-radius: 4px;
     transition: 0.3s;
+    font-size: 14px;
 }
 
 .toolbar button:hover, .markdown-toolbar button:hover {
