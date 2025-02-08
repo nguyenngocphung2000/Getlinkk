@@ -63,16 +63,6 @@
             document.body.removeChild(a);
         }
    
-    function formatText(command) {
-        document.getElementById("editor").focus();
-        if (command === "createLink") {
-            let url = prompt("Nhập URL:");
-            if (url) document.execCommand(command, false, url);
-        } else {
-            document.execCommand(command, false, null);
-        }
-        updateMarkdown();
-    }
     document.addEventListener("DOMContentLoaded", () => {
         const editor = document.getElementById("editor");
         const buttons = document.querySelectorAll(".toolbar button");
