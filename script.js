@@ -54,3 +54,17 @@ document.addEventListener("DOMContentLoaded", () => {
         a.click();
     });
 });
+document.getElementById("markdown-tab").addEventListener("click", function () {
+    document.getElementById("markdown-section").classList.remove("hidden");
+    document.getElementById("code-section").classList.add("hidden");
+    this.classList.add("active");
+    document.getElementById("code-tab").classList.remove("active");
+});
+
+document.getElementById("code-tab").addEventListener("click", function () {
+    document.getElementById("code-section").classList.remove("hidden");
+    document.getElementById("markdown-section").classList.add("hidden");
+    this.classList.add("active");
+    document.getElementById("markdown-tab").classList.remove("active");
+})
+
