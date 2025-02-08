@@ -78,7 +78,7 @@ body {
 }
 
 /* Ô nhập văn bản */
-#editor {
+#editor, #js-input, #python-output {
     width: 100%;
     min-height: 200px;
     max-height: 300px;
