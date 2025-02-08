@@ -18,17 +18,16 @@
             <button data-command="insertUnorderedList">•</button>
             <button data-command="insertOrderedList">1.</button>
             <button data-command="createLink">🔗</button>
-            <button id="copyBtn">📋</button>
-            <button id="downloadBtn">⬇️</button>
         </div>
 
-        <div class="editor-container">
-            <div id="editor" contenteditable="true"></div>
+             <div class="markdown-container">
+            <div class="markdown-toolbar">
+                <button id="copyBtn">📋</button>
+                <button id="downloadBtn">⬇️</button>
+            </div>
+            <textarea id="markdown-output" readonly></textarea>
         </div>
-
-        <textarea id="markdown-output" readonly></textarea>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
